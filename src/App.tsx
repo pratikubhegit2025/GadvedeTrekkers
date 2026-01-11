@@ -26,13 +26,6 @@ function BookingWrapper() {
     <BookingPage
       trek={trek}
       onProceedToPayment={(bookingData) => {
-        console.log("BOOKING DATA", bookingData);
-
-        // 🔜 Later:
-        // 1. Save booking to backend
-        // 2. Create payment order
-        // 3. Redirect to payment gateway
-
         navigate("/booking-success", {
           state: {
             ...bookingData,
