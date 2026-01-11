@@ -51,7 +51,6 @@ export function PremiumTrekCard({
   const [isHovering, setIsHovering] = useState(false);
   const [showCalendar, setShowCalendar] = useState(false);
 
-  // browser-safe interval ref
   const intervalRef = useRef<number | null>(null);
 
   /* ================= IMAGE HOVER LOGIC (FINAL FIX) ================= */
