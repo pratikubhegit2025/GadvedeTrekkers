@@ -1,31 +1,20 @@
-// src/types/trek.ts
-
-export type Difficulty = "Easy" | "Medium" | "Hard";
-
-export interface PremiumTrek {
+export interface TrekDetail {
   id: string;
   name: string;
+  slug: string;
   location: string;
-  difficulty: Difficulty;
   duration: string;
+  difficulty: "Easy" | "Medium" | "Hard";
   altitude: string;
+  trekLength: string;
+  endurance: string;
   images: string[];
   price: number;
   originalPrice?: number;
-  nextDate?: string;     // ✅ FIXED
-  badge?: string;
-  highlight?: string;
   rating: number;
   reviews: number;
-}
-
-export interface TrekDetail extends PremiumTrek {
-  slug: string;
-  trekLength: string;
-  endurance: string;
 
   overview: string;
-
   highlights: string[];
 
   itinerary: {
