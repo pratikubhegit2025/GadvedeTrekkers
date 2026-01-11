@@ -53,18 +53,21 @@ export function PremiumTrekCard({
 
   const intervalRef = useRef<number | null>(null);
 
-  /* ================= IMAGE HOVER LOGIC (FINAL FIX) ================= */
+  /* ================= IMAGE HOVER LOGIC ================= */
 
   useEffect(() => {
-    if (!isHovering || trek.images.length <= 1) {
-      return;
+    if (intervalRef.current !== null) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
     }
 
-    intervalRef.current = window.setInterval(() => {
-      setCurrentImageIndex((prev) =>
-        prev === trek.images.length - 1 ? 0 : prev + 1
-      );
-    }, 800);
+    if (isHovering && trek.images.length > 1) {
+      intervalRef.current = window.setInterval(() => {
+        setCurrentImageIndex((prev) =>
+          prev === trek.images.length - 1 ? 0 : prev + 1
+        );
+      }, 800);
+    }
 
     return () => {
       if (intervalRef.current !== null) {
@@ -72,7 +75,7 @@ export function PremiumTrekCard({
         intervalRef.current = null;
       }
     };
-  }, [isHovering, trek.images]);
+  }, [isHovering, trek.images.length]);
 
   /* ================= HELPERS ================= */
 
@@ -116,12 +119,12 @@ export function PremiumTrekCard({
       <div
         className="relative h-64 overflow-hidden"
         onMouseEnter={() => {
-          setCurrentImageIndex(0); // ✅ reset on hover start
+          setCurrentImageIndex(0);
           setIsHovering(true);
         }}
         onMouseLeave={() => {
           setIsHovering(false);
-          setCurrentImageIndex(0); // ✅ reset on hover end
+          setCurrentImageIndex(0);
         }}
       >
         {trek.images.map((img, index) => (
